@@ -1,0 +1,17 @@
+<h1>Détails de l'auteur</h1>
+<p><strong>Prénom :</strong> <%= @user.first_name%></p>
+
+<p><strong>Nom :</strong> <%= @user.last_name%></p>
+
+<p><strong>Description :</strong> <%= @user.description %></p>
+
+<p><strong>Email :</strong> <%= @user.email %></p>
+
+<p><strong>Age :</strong> <%= @user.age %></p>
+
+<p><strong>Ville :</strong> <%= @user.city.name %></p>
+
+<%= link_to 'Retour à la liste des potins', gossips_path, class: 'btn btn-secondary' %>
+
+
+

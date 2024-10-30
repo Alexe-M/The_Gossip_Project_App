@@ -1,0 +1,15 @@
+<h1>Liste des Potins</h1>
+
+<% @gossips.each do |gossip| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h2 class="card-title">
+        <%= link_to gossip.title, gossip_path(gossip) %>
+      </h2>
+      <p class="card-text">Auteur : <%= link_to "#{gossip.user.first_name}", user_path(gossip.user) %></p>
+
+    </div>
+  </div>
+<% end %>
+
+<%= link_to 'Créer un nouveau potin', new_gossip_path, class: 'btn btn-primary' %>
