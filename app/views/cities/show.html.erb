@@ -1,0 +1,14 @@
+<h1>Les potins de <%= @city.name%> </h1>
+
+<ul> <% @gossips.each do |gossip| %>
+  <li>
+  <%=gossip.title%> : <%=gossip.content%>
+  </li>
+  <% end %> 
+</ul>
+
+
+
+
+
+

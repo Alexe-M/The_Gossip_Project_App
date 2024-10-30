@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  # get "users/index"
-  # get "users/show"
-  # get "users/new"
-  # get "users/create"
-  # get "users/edit"
-  # get "users/update"
-  # get "users/destroy"
+
   get "static_pages/home"
   get "static_pages/team"
   get "static_pages/contact"
@@ -20,6 +14,7 @@ Rails.application.routes.draw do
   # Routes automatisée pour les potins
   resources :gossips
   resources :users
+  resources :cities
 
   # Routes en manuel
   # get "/gossips", to: "gossips#index"
