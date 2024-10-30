@@ -9,7 +9,8 @@
 
 <p><strong>Age :</strong> <%= @user.age %></p>
 
-<p><strong>Ville :</strong> <%= @user.city.name %></p>
+<p><strong>Ville :</strong> <%= link_to "#{@user.city.name}", city_path(@user.city) %></p>
+
 
 <%= link_to 'Retour à la liste des potins', gossips_path, class: 'btn btn-secondary' %>
 
