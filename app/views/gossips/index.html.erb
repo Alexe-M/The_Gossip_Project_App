@@ -7,6 +7,7 @@
         <%= link_to gossip.title, gossip_path(gossip) %>
       </h2>
       <p class="card-text">Auteur : <%= link_to "#{gossip.user.first_name}", user_path(gossip.user) %></p>
+      <%= gossip.comments.count%>
 
     </div>
   </div>

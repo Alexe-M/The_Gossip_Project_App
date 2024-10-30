@@ -1,0 +1,19 @@
+<h1>Edite ton commentaire</h1>
+
+<%= form_for [@gossip, @comment] do |f| %>
+  <div class="form-group">
+    <label>Commentaire</label>
+    <%= f.text_field :content%>
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">Modifier le commentaire</button>
+  </div>
+
+<% end %>
+
+
+<%= form_with(url: gossip_comment_path(@gossip, @comment), method: :delete, local: true, id: "delete-form-#{@comment.id}") do %>
+  <div>
+    <%= link_to "Supprimer", "#", class: "btn", onclick: "event.preventDefault(); if(confirm('Êtes-vous sûr de vouloir supprimer ce commentaire ?')) { document.getElementById('delete-form-#{@comment.id}').submit(); }" %>
+  </div>
+<% end %>

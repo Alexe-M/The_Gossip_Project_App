@@ -3,5 +3,29 @@
 <p><strong>Contenu :</strong> <%= @gossip.content %></p>
 <p><strong>Auteur :</strong> <%= link_to "#{@gossip.user.first_name}", user_path(@gossip.user) %></p>
 <p><strong>Ville de l'auteur :</strong> <%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city) %></p>
+<p><%= link_to "Éditer", edit_gossip_path(@gossip), class: 'btn btn-danger'%></p>
+<p><%= link_to "Supprimer", gossip_path(@gossip), class: 'btn btn-danger', data: { confirm: "êtes-vous sûr?" }, method: :delete, data: { turbo: false }%></p>
+
+<ul> <% @gossip.comments.each do |comment| %>
+  <li>
+  <%=comment.content%> -- Ajouté par : <%=comment.user.first_name%>
+  <p><%= link_to "Éditer", "/gossips/#{@gossip.id}/comments/#{comment.id}/edit", class: 'btn btn-danger'%></p>
+  </li>
+  <% end %> 
+</ul>
+
+
+<%= form_with(url: gossip_comments_path(@gossip), method: :post) do %>
+  <%= label_tag :content, "Ajouter un commentaire :" %>
+  <%= text_field_tag :content, nil, placeholder: "Entrez votre commentaire" %>
+  <%= submit_tag "Valider" %> <% end %>
+
+
+
+
+
+
+
+</p>
 
 <%= link_to 'Retour à la liste des potins', gossips_path, class: 'btn btn-secondary' %>

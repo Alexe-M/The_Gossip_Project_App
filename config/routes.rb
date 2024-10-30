@@ -12,9 +12,12 @@ Rails.application.routes.draw do
 
   # pour voir toutes les routes --> rails routes
   # Routes automatisée pour les potins
-  resources :gossips
   resources :users
   resources :cities
+
+  resources :gossips do
+    resources :comments
+  end
 
   # Routes en manuel
   # get "/gossips", to: "gossips#index"
