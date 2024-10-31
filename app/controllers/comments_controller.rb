@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create, :edit]
+
 
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
@@ -66,6 +68,13 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:content)
+  end
+
+  def authenticate_user
+    unless current_user
+      flash[:alert] = "Vous devez d'abord vous connectez à votre compte !"
+      redirect_to new_session_path
+    end
   end
 
 end

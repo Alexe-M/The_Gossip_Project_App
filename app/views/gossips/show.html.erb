@@ -1,31 +1,31 @@
 <h1><%= @gossip.title %></h1>
 <p><strong>Titre :</strong> <%= @gossip.title %></p>
 <p><strong>Contenu :</strong> <%= @gossip.content %></p>
-<p><strong>Auteur :</strong> <%= link_to "#{@gossip.user.first_name}", user_path(@gossip.user) %></p>
-<p><strong>Ville de l'auteur :</strong> <%= link_to "#{@gossip.user.city.name}", city_path(@gossip.user.city) %></p>
-<p><%= link_to "Éditer", edit_gossip_path(@gossip), class: 'btn btn-danger'%></p>
-<p><%= link_to "Supprimer", gossip_path(@gossip), class: 'btn btn-danger', data: { confirm: "êtes-vous sûr?" }, method: :delete, data: { turbo: false }%></p>
+<p><strong>Auteur :</strong> <%= link_to @gossip.user.first_name, user_path(@gossip.user) %></p>
+<p><strong>Ville de l'auteur :</strong> <%= link_to @gossip.user.city.name, city_path(@gossip.user.city) %></p>
 
-<ul> <% @gossip.comments.each do |comment| %>
-  <li>
-  <%=comment.content%> -- Ajouté par : <%=comment.user.first_name%>
-  <p><%= link_to "Éditer", "/gossips/#{@gossip.id}/comments/#{comment.id}/edit", class: 'btn btn-danger'%></p>
-  </li>
+<% if current_user == @gossip.user %>
+  <p><%= link_to "Éditer", edit_gossip_path(@gossip), class: 'btn btn-warning' %></p>
+  <p><%= link_to "Supprimer", gossip_path(@gossip), method: :delete, data: { confirm: "Êtes-vous sûr?", turbo: false }, class: 'btn btn-danger' %></p>
+<% end %>
+
+<h3>Commentaires :</h3>
+<ul>
+  <% @gossip.comments.each do |comment| %>
+    <li>
+      <%= comment.content %> -- Ajouté par : <%= comment.user.first_name %>
+        <p><%= link_to "Éditer", edit_gossip_comment_path(@gossip, comment), class: 'btn btn-secondary' %></p>
+    </li>
   <% end %> 
 </ul>
 
+<h3>Ajouter un commentaire :</h3>
+<%= form_with(url: gossip_comments_path(@gossip), method: :post) do |f| %>
+  <div class="form-group">
+    <%= f.label :content, "Commentaire" %>
+    <%= f.text_field :content, placeholder: "Entrez votre commentaire", class: "form-control" %>
+  </div>
+  <%= f.submit "Valider", class: "btn btn-primary" %>
+<% end %>
 
-<%= form_with(url: gossip_comments_path(@gossip), method: :post) do %>
-  <%= label_tag :content, "Ajouter un commentaire :" %>
-  <%= text_field_tag :content, nil, placeholder: "Entrez votre commentaire" %>
-  <%= submit_tag "Valider" %> <% end %>
-
-
-
-
-
-
-
-</p>
-
-<%= link_to 'Retour à la liste des potins', gossips_path, class: 'btn btn-secondary' %>
+<p><%= link_to 'Retour à la liste des potins', gossips_path, class: 'btn btn-secondary' %></p>

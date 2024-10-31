@@ -1,4 +1,6 @@
 class GossipsController < ApplicationController
+  before_action :authenticate_user, only: [:new, :create, :show, :edit]
+  before_action :authenticate_owner_user, only: [:edit, :destroy, :update]
   # attr_accessor :gossip
 
   # les 7 méthodes en REST 
@@ -21,16 +23,16 @@ class GossipsController < ApplicationController
   end
 
   def create
-    # Méthode qui créé un potin à partir du contenu du formulaire de new.html.erb, soumis par l'utilisateur
-    # pour info, le contenu de ce formulaire sera accessible dans le hash params (ton meilleur pote)
-    # Une fois la création faite, on redirige généralement vers la méthode show (pour afficher le potin créé)
-    @gossip = Gossip.new(title: params[:title], content: params[:content])
+    @gossip = Gossip.new(gossip_params)
+    @gossip.user = current_user
+    
     if @gossip.save
-      redirect_to gossips_path, notice: "Le potin a été créé avec succès !"
+      redirect_to gossip_path(@gossip), notice: "Le potin a été créé avec succès !"
     else
       render :new
     end
   end
+  
   
   # CRUD UPDATE
   def edit
@@ -68,5 +70,22 @@ class GossipsController < ApplicationController
   def gossip_params
     params.require(:gossip).permit(:title, :content)
   end
+
+
+  def authenticate_user
+    unless current_user
+      flash[:danger] = "Veuillez d'abord vous connectez à votre compte"
+      redirect_to new_session_path
+    end
+  end
+
+  def authenticate_owner_user
+    @gossip = Gossip.find(params[:id])  # Trouve le potin correspondant
+    unless current_user == @gossip.user
+      flash[:danger] = "Vous n'être pas le créateur de ce potin"
+      redirect_to gossips_path
+    end
+  end
+
   
 end

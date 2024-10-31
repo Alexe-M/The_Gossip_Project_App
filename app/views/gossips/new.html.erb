@@ -1,14 +1,23 @@
 <h1>Créer un nouveau potin</h1>
 
-<form action="<%= gossips_path %>" method="POST">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <label for="gossip_text">Votre Gossip :</label>
-  <input type="text" name="gossip_text" id="gossip_text" required>
-  <input type="submit" value="Valider">
-</form>
+<%= form_for @gossip do |f| %>
+  <div class="form-group"> 
+    <%= f.label :title, "Titre" %>
+    <%= f.text_field :title, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :content, "Contenu" %>
+    <%= f.text_area :content, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Créer le potin", class: "btn btn-primary" %> 
+  </div>
+<% end %>
 
 <% if @gossip.errors.any? %>
-  <div>
+  <div class="alert alert-danger">
     <h2>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</h2>
     <ul>
       <% @gossip.errors.full_messages.each do |message| %>
