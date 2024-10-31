@@ -15,13 +15,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Utilisateur créé avec succès !"
+      log_in(@user)
+      flash[:success] = "Vous êtes connecté avec succès !"
       redirect_to gossips_path
     else
+      flash[:alert] = "Tous les champs sont obligatoires, le mot de passe doit contenir au moins 6 caractères"
       render :new
     end
+    # puts @user.errors.full_messages
   end
-
+  
 
   def edit
 

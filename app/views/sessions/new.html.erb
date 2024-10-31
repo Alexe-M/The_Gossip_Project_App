@@ -1,0 +1,15 @@
+<h1>Login : connecte toi à ton compte</h1>
+
+<%= form_tag sessions_path, method: "post" do %>
+  
+  <%= label_tag "Email" %>
+  <%= text_field_tag :email %>
+  <br /> <br />
+
+  <%= label_tag "Password" %>
+  <%= password_field_tag :password %>
+  <br /> <br />
+
+  <%= submit_tag "Confirm" %>
+
+<% end %>

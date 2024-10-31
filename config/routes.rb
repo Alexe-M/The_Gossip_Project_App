@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   # Routes automatisée pour les potins
   resources :users
   resources :cities
+  resources :sessions, only: [:new, :create, :destroy]
 
   resources :gossips do
     resources :comments
