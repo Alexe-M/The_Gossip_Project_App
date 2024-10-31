@@ -24,19 +24,17 @@ class UsersController < ApplicationController
     end
     # puts @user.errors.full_messages
   end
-  
+
 
   def edit
-
   end
+
 
   def update
-
-
   end
 
+  
   def destroy
-
   end
 
   private

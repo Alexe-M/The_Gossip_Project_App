@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:email])
 
     if @user && @user.authenticate(params[:password])
-      log_in(user)  # Utilisation de la méthode log_in au lieu de session[:user_id] = @user.id
+      log_in(@user)  # Utilisation de la méthode log_in au lieu de session[:user_id] = @user.id
       flash[:notice] = "Connexion réussie, bienvenue #{@user.first_name}!"
       redirect_to gossips_path
     else
@@ -24,7 +24,6 @@ class SessionsController < ApplicationController
     flash[:notice] = "Déconnexion réussie !"
     redirect_to new_session_path
   end
-
 
 
 

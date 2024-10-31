@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # get '/welcome', to: 'static#index' 
 
-  root 'gossips#index'   # page d'accueil
+  root 'sessions#new'   # page d'accueil
 
 
   # pour voir toutes les routes --> rails routes
