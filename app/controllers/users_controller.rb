@@ -4,14 +4,8 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    puts "$" * 60
-    puts params
-    puts 
-    puts "$" * 60
-
-    @user = User.find(params[:id])
-
+  def show 
+   @user = User.find(params[:id])
   end
 
   def new
@@ -19,7 +13,13 @@ class UsersController < ApplicationController
   end
 
   def create
-
+    @user = User.new(user_params)
+    if @user.save
+      flash[:success] = "Utilisateur créé avec succès !"
+      redirect_to gossips_path
+    else
+      render :new
+    end
   end
 
 
@@ -29,12 +29,18 @@ class UsersController < ApplicationController
 
   def update
 
+
   end
 
   def destroy
 
   end
 
+  private
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :city_id)
+  end
 
 
 end

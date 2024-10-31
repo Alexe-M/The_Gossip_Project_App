@@ -1,74 +1,62 @@
 source "https://rubygems.org"
 
 ruby '3.2.2'
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+
+# Gems pour le framework Rails
 gem "rails", "~> 7.2.1", ">= 7.2.1.2"
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+gem "activerecord"
+gem "pg", "~> 1.1"               # Base de données PostgreSQL pour Active Record
+gem "puma", ">= 5.0"             # Serveur web Puma
 
 # Gems pour le frontend
 gem 'bootstrap'
 gem 'cssbundling-rails'
 
-gem 'activerecord'
-
-gem "sprockets-rails"
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
-# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+# Gems pour JavaScript
 gem "importmap-rails"
-# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
-gem "turbo-rails"
-# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
-gem "stimulus-rails"
-# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "turbo-rails"                # SPA-like accélérateur de page de Hotwire
+gem "stimulus-rails"             # Framework JavaScript de Hotwire
+
+# Pour les APIs JSON
 gem "jbuilder"
-# Use Redis adapter to run Action Cable in production
-# gem "redis", ">= 4.0.1"
 
-# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+# Pour la gestion des mots de passe
+gem "bcrypt", "~> 3.1.7"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# Pour les fuseaux horaires sur Windows
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
-# Reduces boot times through caching; required in config/boot.rb
+# Améliore le temps de démarrage de l’application
 gem "bootsnap", require: false
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
-
 group :development, :test do
-  
+  # Pour générer de fausses données dans les tests
   gem 'faker'
   
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  # Outils de débogage
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+  # Analyse des vulnérabilités de sécurité
   gem "brakeman", require: false
 
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  # Style guide Ruby de Rails
   gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
+  # Console dans les pages d’exception
   gem "web-console"
 
+  # Outils de console interactifs
   gem 'pry'
   gem 'pry-rails'
   gem 'rubocop', require: false
-  gem 'dotenv-rails'
-
+  gem 'dotenv-rails'              # Gestion des variables d’environnement
 end
 
 group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  # Tests de système
   gem "capybara"
   gem "selenium-webdriver"
 end

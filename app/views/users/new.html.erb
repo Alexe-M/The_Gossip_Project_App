@@ -1,2 +1,46 @@
-<h1>Users#new</h1>
+<h1>Formulaire d'inscription</h1>
+
+<%= form_for @user do |f| %>
+  <div class="form-group"> 
+    <label>First_name</label>
+    <%= f.text_field :first_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Last name</label>
+    <%= f.text_field :last_name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Email</label>
+    <%= f.text_field :email, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <label>Password</label>
+    <%= f.text_field :password, class: "form-control" %>
+  </div>
+
+  <div>
+    <%= f.label :city_id %> 
+    <%= f.collection_select :city_id, City.all, :id, :name, { prompt: 'Sélectionnez une ville' }, required: true %> 
+  </div>
+
+
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary">S'inscrire</button> 
+  </div>
+
+  <% end %>
+
+
+
+
+ 
+
+  
+
+
+
+
 <p>Find me in app/views/users/new.html.erb</p>
